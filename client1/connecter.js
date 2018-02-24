@@ -26,17 +26,18 @@ function mouseClick(id){
     sendData(id,0);
 }    
 function sendData(id,difference){
-      var data = {};
+var data = "user="+username+"&id="+id+"&value="+difference;
 
-      data["user"] = username;
-      data["id"] = id;
-      data["value"] = difference;
- 
+var xhr = new XMLHttpRequest();
 
-  // construct an HTTP request
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://test.com/capture", true);
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-  xhr.send(JSON.stringify(data));
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://adaptyoumain.herokuapp.com/capture/save",true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.send(data);
 }
 
