@@ -1,3 +1,19 @@
+var data = "user="+username;
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://adaptyoumain.herokuapp.com/capture/control");
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+xhr.send(data);
+
 var arrayLength = elements.length;
 for (var i = 0; i < arrayLength; i++) {
     element = elements[i];
